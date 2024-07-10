@@ -1,7 +1,7 @@
 import { Hono } from "hono"
 import { PrismaClient } from "@prisma/client/edge"
 import { withAccelerate } from "@prisma/extension-accelerate"
-import { sign } from "hono/jwt"
+import { sign } from "hono/jwt"  //don't need to import the jsonwebtoken lib to perform this task!! it it inbluid
 
 
 const signin= new Hono<{
@@ -20,12 +20,15 @@ signin.post('/',async(c)=>{
                 email:body.email
             }
         })
+        if(user){
+            const token = await sign({id:user.id},c.env.JWT_sec)
+            return c.json({
+                jwt:token
+            })
+        }
+        
 
-        const token = await sign({id:user?.id},c.env.JWT_sec)
-
-        return c.json({
-            jwt:token
-        })
+       
     }catch(e){
         return c.json({
             msg:"invalid email"

@@ -7,7 +7,13 @@ interface Env{
     Bindings:{
         DATABASE_URL:string,
         JWT_sec:string
+        
+    },
+    Variables:{
+        id:string
     }
+
+    
 }
 const blog = new Hono<Env>()
 
@@ -19,20 +25,16 @@ blog.use("/*",async(c,next)=>{
         const response = await verify(token,c.env.JWT_sec)
         if(response.id){
 
-            c.set('jwtPayload',response.id)
+            c.set('id',response.id)
             console.log(response.id);
             
             await next()
         
-        }else{
-            c.status(401)
-            return c.json({
-                msg:"invalid credintials"
-            })
         }
     }catch(e){
+        c.status(401)
         return c.json({
-            msg:"error while verifying"
+            msg:"invalid credintials!!"
         })
     }
 

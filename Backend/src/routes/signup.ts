@@ -7,7 +7,8 @@ import { withAccelerate } from '@prisma/extension-accelerate'
 
 const signup= new Hono<{
     Bindings:{
-        DATABASE_URL:string  //u have to give bingdings as a genric to ur routes
+        DATABASE_URL:string 
+         //u have to give bingdings as a genric to ur routes
     }
 }>()
 
