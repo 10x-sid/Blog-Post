@@ -17,13 +17,13 @@ const blog = new Hono<Env>()
 //middleware
 blog.use("/*",async(c,next)=>{  //* is for every blog route 
     try{
-        const header = await c.req.header("authorization")||""
+        const header =  c.req.header("authorization")||""
         const token= header.split(" ")[1]
         const response = await verify(token,c.env.JWT_sec)
         if(response.id){
 
             c.set('jwtPayload',response.id)
-            next()
+            await next()
         
         }
     }catch(e){
@@ -37,30 +37,45 @@ blog.use("/*",async(c,next)=>{  //* is for every blog route
 
 blog.get('/',async(c)=>{ //all the blog of the user 
     const prisma = new PrismaClient({datasourceUrl:c.env.DATABASE_URL}).$extends(withAccelerate())
-    const body  = await c.req.json()
+    const userId = c.get("jwtPayload")
     try{
         const posts= await prisma.post.findMany({
             where:{
-                authorId:body.userId
+                authorId:userId
             },
             
         })
+        if(posts.length==0){
+            return c.text("no blog found")
+        }
 
         return c.json(posts)
     }catch(e){
-        return c.text("no blog found")
+        return c.text("internal error")
     }
    
 })
 
-
-blog.get('/',async(c)=>{ //blog post for the slected blog
+blog.get('/bulk',async(c)=>{    //all the title for the landing page  and it has to be above :/id cause every time only that will executed!!
+   
     const prisma = new PrismaClient({datasourceUrl:c.env.DATABASE_URL}).$extends(withAccelerate())
-    const body = await c.req.json()
+    try{
+        const allBlog= await prisma.post.findMany({})
+        c.status(200)
+        return c.json(allBlog)
+    }catch(e){
+        return c.text("eroor file fetching data")
+    }
+})
+
+
+blog.get('/:id',async(c)=>{ //blog post for the slected blog
+    const prisma = new PrismaClient({datasourceUrl:c.env.DATABASE_URL}).$extends(withAccelerate())
+    const id =  c.req.param('id')
     try{
         const post= await prisma.post.findUnique({
             where:{
-                id:body.id
+                id:id
             },
             
         })
@@ -73,12 +88,6 @@ blog.get('/',async(c)=>{ //blog post for the slected blog
 })
 
 //note: learn about pagination and impliment here
-blog.get('/bulk',async(c)=>{    //all the title for the landing page  
-   
-        const prisma = new PrismaClient({datasourceUrl:c.env.DATABASE_URL}).$extends(withAccelerate())
-        const allBlog= prisma.post.findMany()
-        return c.json(allBlog)
-    })
 
 
 
@@ -89,17 +98,19 @@ blog.get('/bulk',async(c)=>{    //all the title for the landing page
 blog.post('/',async(c)=>{
     const prisma = new PrismaClient({datasourceUrl:c.env.DATABASE_URL}).$extends(withAccelerate())
     const body= await c.req.json()
+    const userId= c.get("jwtPayload")
     try{
         const blog= await prisma.post.create({
             data:{
-                authorId:body.userId,
+                authorId:userId,
                 content:body.content,
                 title:body.title,
                 published:body.published
             }
         })
         return c.json({
-            blogId:blog.id
+            blogId:blog.id,
+            msg:"blog added succesfully"
         })
     }catch(e){
         return c.json({
