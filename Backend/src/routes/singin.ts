@@ -17,7 +17,8 @@ signin.post('/',async(c)=>{
        
         const user = await prisma.user.findUnique({
             where:{
-                email:body.email
+                email:body.email,
+                password:body.password
             }
         })
         if(user){
