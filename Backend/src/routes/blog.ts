@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { verify,decode } from "hono/jwt";
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
+import { blogSchema, UpdateblogSchema } from "@shekharsid/blog-post";
 
 interface Env {
     Bindings: {
@@ -98,6 +99,9 @@ blog.get('/:id',async(c)=>{ //blog post for the slected blog
 blog.post('/',async(c)=>{
     const prisma = new PrismaClient({datasourceUrl:c.env.DATABASE_URL}).$extends(withAccelerate())
     const body= await c.req.json()
+    const { success }= blogSchema.safeParse(body)
+    if(!success){
+        return c.text("invalid inputs!!")}
     const userId= c.get("jwtPayload")
     try{
         const blog= await prisma.post.create({
@@ -129,6 +133,10 @@ blog.post('/',async(c)=>{
 blog.put('/',async(c)=>{
     const prisma = new PrismaClient({datasourceUrl:c.env.DATABASE_URL}).$extends(withAccelerate())
     const body  = await c.req.json()
+    const { success }= UpdateblogSchema.safeParse(body)
+    if(!success){
+        return c.text("invalid inputs!!")
+    }
     try{
         await prisma.post.update({
             where:{
