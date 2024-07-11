@@ -132,12 +132,11 @@ blog.put('/',async(c)=>{
     try{
         await prisma.post.update({
             where:{
-                id:body.id,  //i wnat to update the post
+                id:body.id  //i wnat to update the post
             },
             data:{
                 content:body.content,
-                title:body.title,
-                published:body.published
+                title:body.title
 
             }
         })
