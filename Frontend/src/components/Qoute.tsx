@@ -1,9 +1,10 @@
 export default  function Quote(){
     return(
-        <div className="bg-slate-300 h-screen grid w-1/2 place-content-center p-8 invisible lg:visible"> 
+        <div className="bg-slate-100 h-screen grid place-content-center w-auto px-8"> 
             
-            <div className="text-black text-3xl font-extrabold w-auto ">
-                    "Our industry does not respect tradition — it only respects innovation."
+            <div className="text-black text-3xl font-extrabold  ">
+                    "Our industry does not respect tradition —
+                     it only respects innovation."
             </div>
             
             <div className="text-black text-xl font-semibold pt-2">
