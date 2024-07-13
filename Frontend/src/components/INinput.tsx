@@ -28,7 +28,7 @@ export const INinput=()=>{
         console.log(jwt);
         
         localStorage.setItem("token",jwt)
-        navigate("/blog/id")
+        navigate("/")
         }
         
         
