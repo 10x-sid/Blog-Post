@@ -27,7 +27,7 @@ export const INinput=()=>{
         const jwt= res.data.jwt
         console.log(jwt);
         
-        localStorage.setItem("token",jwt)
+        localStorage.setItem("token","bearer"+" "+jwt)
         navigate("/")
         }
         
