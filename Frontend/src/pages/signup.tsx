@@ -4,11 +4,11 @@ import { Upinput } from "../components/UpInput";
 export default function Signup(){
     return(
 
-        <div className="lg:flex ">
-            <div className="lg:w-1/2 lg:h-screen px-27">
+        <div className="grid md:grid-cols-2 grid-cols-1 ">
+            <div className=" px-27">
                 <Upinput />
             </div>
-            <div className="invisible lg:visible w-1/2 h-screen">
+            <div className="invisible md:visible">
                 <Quote/>
             </div>
         

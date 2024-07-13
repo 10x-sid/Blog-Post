@@ -1,11 +1,15 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import Input from "./Input"
 import { useState } from "react"
 import { signinTypes } from "@shekharsid/blog-post"
+import axios from "axios"
+import { URL } from "../Config"
+// import { Alert, Stack } from "@mui/material"
 
 
 
 export const INinput=()=>{
+    const navigate= useNavigate()
     const [passwordVisible,setVisible]=useState(false)
     const [inputs,setInputs]=useState<signinTypes>({ //pass types of signup inputs as genric to the state varible so  that we change while mainting the types of the varibles
         email:"",
@@ -15,6 +19,24 @@ export const INinput=()=>{
 
     function togglePasswordVisibility(){
         setVisible(!passwordVisible)
+    }
+    async function SendReq() {
+       try{ 
+        
+        const res = await axios.post(`${URL}/api/v1/signin`,inputs)
+        const jwt= res.data.jwt
+        console.log(jwt);
+        
+        localStorage.setItem("token",jwt)
+        navigate("/blog/id")
+        }
+        
+        
+        catch(e){
+           alert("wrong creds")
+
+        }
+
     }
     return(
         <div className="w-full">
@@ -46,7 +68,7 @@ export const INinput=()=>{
 
                         }}/>
                     </div>
-                        <button className="rounded bg-black text-white text-bold items-center mt-7 py-2 mr-10 w-full">
+                        <button onClick={SendReq}  className="rounded bg-black text-white text-bold items-center mt-7 py-2 mr-10 w-full">
                             Sign in
                         </button>
         
