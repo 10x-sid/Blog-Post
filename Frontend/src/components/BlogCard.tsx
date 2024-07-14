@@ -8,17 +8,18 @@ export interface CardProps {
 }
 
 export function BlogCard({ authorName, publishDate, title, content }: CardProps) {
+    const data= content.split(" ").slice(0,21).join(" ")
     return (
         <div className="border-b border-slate-200 rounded-lg p-4 cursor-pointer">
                 <div className="flex ">
                     <div className="felx flex-col justify-center">
                         <Avatar title={authorName}/>
                     </div> 
-                    <div className="font-medium text-gray-800 ml-3">{authorName} ~</div><div className="font-extralight  text-gray-600">{publishDate}</div>
+                    <div className="font-medium text-gray-800 ml-3">{authorName[0].toUpperCase()+authorName.slice(1,authorName.length)} ~</div><div className="font-extralight  text-gray-600">{publishDate}</div>
                 </div>
            
-            <div className="font-semibold  text-xl mt-2">{title}</div>
-            <div className="text-gray-500 font-normal">{content}...</div>
+            <div className="font-extrabold max-w-lg  text-xl mt-2">{title}</div>
+            <div className="text-gray-500 font-normal max-w-xl">{data}...</div>
             <div className="text-gray-900 text-sm mt-3">{Math.ceil(content.length / 100)} min read</div>
         </div>
     );
