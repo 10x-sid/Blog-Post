@@ -9,7 +9,7 @@ interface CardProps {
 
 export function BlogCard({ authorName, publishDate, title, content }: CardProps) {
     return (
-        <div className="border-b border-slate-200 rounded-lg p-4">
+        <div className="border-b border-slate-200 rounded-lg p-4 cursor-pointer">
                 <div className="flex ">
                     <div className="felx flex-col justify-center">
                         <Avatar title={authorName}/>

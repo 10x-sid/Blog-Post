@@ -1,8 +1,11 @@
+import { Link } from "react-router-dom";
 import { BlogCard } from "../components/BlogCard";
 import { Navbar } from "../components/Navbar";
 import { useDash } from "../hooks/get";
+import Skeleton from "../components/Skeleton";
 
 interface blogProp{
+    id:string,
     title:string,
     content:string,
     author:{
@@ -18,11 +21,11 @@ export default function Dashboard(){
         <div>
             <Navbar/>
             <div className="grid place-content-center">
-            <div className="max-w-2xl">
-                {loading? <div>loading</div>:
+            <div className=" w-screen max-w-screen-lg">
+                {loading? <div ><Skeleton/></div>:
                 
                 blogs.map((blog:blogProp)=>{
-                    return <BlogCard title={blog.title} content={blog.content} authorName={blog.author.name} publishDate="2nd jan"/>
+                    return <Link to={`/blog/${blog.id}`}> <BlogCard title={blog.title} content={blog.content} authorName={blog.author.name} publishDate="2nd jan"/> </Link>
                 })}
                 
             </div>
