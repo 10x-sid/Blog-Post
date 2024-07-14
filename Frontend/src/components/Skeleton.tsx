@@ -78,3 +78,26 @@
             
         )
     }
+
+    export function Blogskeleton(){
+        return(
+            <div className=" max-w-screen-2xl w-full">
+                <div className="grid grid-cols-12 mx-20  mt-20">
+                    <div className=" col-span-8 animate-puls w-full">
+                        <div className="h-8 mt-2 rounded-lg w-full animate-pulse bg-slate-300"></div> 
+                        <div className="h-4 mt-2 rounded-lg w-70 animate-pulse bg-slate-300"></div> 
+                        <div className="h-4 mt-2 rounded-lg w-full animate-pulse bg-slate-300"></div> 
+                        <div className="h-4 mt-2 rounded-lg w-20 animate-pulse bg-slate-300"></div> 
+                        <div className="h-4 mt-2 rounded-lg w-full animate-pulse bg-slate-300"></div> 
+                        <div className="h-4 mt-2 rounded-lg w-30 animate-pulse bg-slate-300"></div> 
+
+                    </div>
+                    <div className=" col-span-4 animate-puls px-10 mx-10">
+                    <div className="h-4 mt-2 rounded-lg w-20 animate-pulse bg-slate-300"></div> 
+                    <div className="h-4 mt-2 rounded-lg w-full animate-pulse bg-slate-300"></div> 
+
+                    </div>
+                </div>
+            </div>
+        )
+    }

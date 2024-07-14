@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom"
 import { Navbar } from "../components/Navbar"
 import { useblog } from "../hooks/get"
 import { Post } from "../components/Post"
+import { Blogskeleton } from "../components/Skeleton"
 
 
 export default function Blog(){
@@ -11,6 +12,7 @@ export default function Blog(){
         return(
             <div>
                 <Navbar/>
+                <Blogskeleton/>
             </div>
         )
 
