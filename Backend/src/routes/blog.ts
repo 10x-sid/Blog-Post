@@ -70,7 +70,8 @@ blog.get('/bulk',async(c)=>{    //all the title for the landing page  and it has
                     select:{
                         name:true
                     }
-                }
+                },
+                date:true
             }
         })
         c.status(200)
@@ -89,6 +90,19 @@ blog.get('/:id',async(c)=>{ //blog post for the slected blog
             where:{
                 id:id
             },
+            select:{
+                id:true,
+                title:true,
+                content:true,
+                author:{
+                    select:{
+                        name:true
+                    }
+                },
+
+                date:true
+
+            }
             
         })
 
@@ -110,6 +124,7 @@ blog.get('/:id',async(c)=>{ //blog post for the slected blog
 blog.post('/',async(c)=>{
     const prisma = new PrismaClient({datasourceUrl:c.env.DATABASE_URL}).$extends(withAccelerate())
     const body= await c.req.json()
+    const date= new Date().getDate()+"/"+(new Date().getMonth()+1)+"/"+new Date().getFullYear()
     const { success }= blogSchema.safeParse(body)
     if(!success){
         return c.text("invalid inputs!!")}
@@ -120,7 +135,9 @@ blog.post('/',async(c)=>{
                 authorId:userId,
                 content:body.content,
                 title:body.title,
-                published:body.published
+                published:body.published,
+                date:date
+                
             }
         })
         return c.json({

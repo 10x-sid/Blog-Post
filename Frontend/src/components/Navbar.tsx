@@ -2,7 +2,7 @@ import { Avatar } from "./BlogCard"
 
 export const Navbar=()=>{
     return(
-        <div className=" flex justify-between m-5 p-2 border-b">
+        <div className=" flex justify-between m-5 p-2 border-b ">
             <div className="flex flex-col justify-center text-black font-extrabold">
                 BLOG-POST
             </div>

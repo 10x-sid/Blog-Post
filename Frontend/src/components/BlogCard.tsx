@@ -1,6 +1,6 @@
 
 
-interface CardProps {
+export interface CardProps {
     authorName: string;
     publishDate: string;
     title: string;

@@ -1,12 +1,12 @@
 
         
    
-   export default  function Skeleton(){
+   export function Skeleton(){
         return(
             
            <div className=" w-max-2xl">
 
-            <div className=" shadow mx-10 pt-3 mb-4 border-b ">
+            <div className=" rounded-sm border mx-10 mb-4 border-b ">
                         <div className="">
                         <div className="flex">
                             <div className="h-6 w-6 rounded-full animate-pulse bg-slate-500 flex flex-col justify-center"></div>
@@ -19,7 +19,7 @@
                         </div>
                     </div>
 
-            <div className=" shadow mx-10 pt-3 mb-2 ">
+            <div className=" rounded-sm border mx-10 pt-3 mb-2 ">
                         <div className="">
                         <div className="flex">
                             <div className="h-6 w-6 rounded-full animate-pulse bg-slate-500 flex flex-col justify-center"></div>
@@ -32,7 +32,7 @@
                         </div>
                     </div>
 
-            <div className=" shadow mx-10 pt-3 mb-2 ">
+            <div className=" rounded-sm border mx-10 pt-3 mb-2 ">
                         <div className="">
                         <div className="flex">
                             <div className="h-6 w-6 rounded-full animate-pulse bg-slate-500 flex flex-col justify-center"></div>
@@ -45,7 +45,7 @@
                         </div>
                     </div>
 
-            <div className=" shadow mx-10 pt-3 mb-2 ">
+            <div className=" rounded-sm border mx-10 pt-3 mb-2 ">
                         <div className="">
                         <div className="flex">
                             <div className="h-6 w-6 rounded-full animate-pulse bg-slate-500 flex flex-col justify-center"></div>
@@ -58,7 +58,7 @@
                         </div>
                     </div>
 
-            <div className=" shadow mx-10 pt-3 mb-2 ">
+            <div className=" rounded-sm border mx-10 pt-3 mb-2 ">
                         <div className="">
                         <div className="flex">
                             <div className="h-6 w-6 rounded-full animate-pulse bg-slate-500 flex flex-col justify-center"></div>

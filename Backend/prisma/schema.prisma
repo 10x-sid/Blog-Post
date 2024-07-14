@@ -27,6 +27,7 @@ model Post{
   content   String
   published Boolean @default(false)
   author    User    @relation(fields: [authorId],references: [id])
-  authorId  String   //author id is related to id 
+  authorId  String   
+  date      String
 
 }
