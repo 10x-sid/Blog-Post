@@ -61,7 +61,18 @@ blog.get('/bulk',async(c)=>{    //all the title for the landing page  and it has
    
     const prisma = new PrismaClient({datasourceUrl:c.env.DATABASE_URL}).$extends(withAccelerate())
     try{
-        const allBlog= await prisma.post.findMany({})
+        const allBlog= await prisma.post.findMany({
+            select:{
+                id:true,
+                content:true,
+                title:true,
+                author:{
+                    select:{
+                        name:true
+                    }
+                }
+            }
+        })
         c.status(200)
         return c.json(allBlog)
     }catch(e){
