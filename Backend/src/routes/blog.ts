@@ -36,7 +36,34 @@ blog.use("/*",async(c,next)=>{  //* is for every blog route
 
 })
 
-blog.get('/',async(c)=>{ //all the blog of the user 
+blog.get("/name",async(c)=>{
+    try{
+        const prisma= new PrismaClient({datasourceUrl:c.env.DATABASE_URL}).$extends(withAccelerate())
+        const userId= c.get("jwtPayload")
+        const res= await prisma.user.findUnique({
+            where:{
+                id:userId
+
+            },
+            select:{
+                name:true
+
+
+            }
+
+        })
+        if(res){
+            return c.json({res})
+        }
+        
+    }catch(e){
+        return c.json({
+        name:"Aynonimus"
+        })
+    }
+})
+
+blog.get('/myblog',async(c)=>{ //all the blog of the user 
     const prisma = new PrismaClient({datasourceUrl:c.env.DATABASE_URL}).$extends(withAccelerate())
     const userId = c.get("jwtPayload")
     try{
@@ -44,6 +71,19 @@ blog.get('/',async(c)=>{ //all the blog of the user
             where:{
                 authorId:userId
             },
+            select:{
+                id:true,
+                title:true,
+                content:true,
+                date:true,
+                author:{
+                    select:{
+                        name:true
+                    }
+                }
+
+
+            }
             
         })
         if(posts.length==0){

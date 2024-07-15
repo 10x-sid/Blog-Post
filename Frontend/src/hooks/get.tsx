@@ -71,3 +71,26 @@ export function useblog({id}:{id:string}){
         loading,blog
     }
 }
+
+
+export function useName(){
+    const[name,setName]=useState("")
+
+    useEffect(()=>{
+        axios.get(`${URL}/api/v1/blog/name`,{
+            headers:{
+                Authorization:localStorage.getItem("token")
+            }
+        }).then((res)=>{
+            console.log(res);
+            
+            setName(res.data.res.name)
+        })
+    },[])
+    console.log(name);
+    
+
+    return name
+
+}
+
