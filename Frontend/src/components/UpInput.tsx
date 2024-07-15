@@ -27,8 +27,12 @@ export const Upinput=()=>{
 
     async function SendReq(){
         try{
-             await axios.post(`${URL}/api/v1/signup`,inputs)
-            
+             const res= await axios.post(`${URL}/api/v1/signup`,inputs)
+            if(res.data=="invalid inputs){
+               throw new Error
+                return
+            }
+               
             navigate("/signin")
         }catch(e){
             alert("Invalid inputs")
