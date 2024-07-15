@@ -60,13 +60,16 @@ export function useblog({id}:{id:string}){
     
                 setBlog(res.data)
                 setLoading(true)
-            }catch(e){
-                navigate("/")
-            }
+            }catch (e) {
+                console.error("Error fetching blog:", e);
+                navigate("/");}
+            // } finally {
+            //     setLoading(false);
+            // }
 
         }
         Res()
-    },[])
+    },[id])
     return {
         loading,blog
     }
