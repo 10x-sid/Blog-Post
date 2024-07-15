@@ -6,7 +6,7 @@
             
            <div className=" w-max-3xl">
 
-            <div className=" rounded-lg border mx-10 mb-4 border-b ">
+            <div className=" rounded-lg  mx-10 mb-4 -b ">
                         <div className="">
                         <div className="flex">
                             <div className="h-6 w-6 rounded-full animate-pulse bg-slate-500 flex flex-col justify-center"></div>
@@ -19,7 +19,7 @@
                         </div>
                     </div>
 
-            <div className=" rounded-sm border mx-10 pt-3 mb-2 ">
+            <div className=" rounded-sm  mx-10 pt-3 my-4 ">
                         <div className="">
                         <div className="flex">
                             <div className="h-6 w-6 rounded-full animate-pulse bg-slate-500 flex flex-col justify-center"></div>
@@ -32,7 +32,7 @@
                         </div>
                     </div>
 
-            <div className=" rounded-sm border mx-10 pt-3 mb-2 ">
+            <div className=" rounded-sm  mx-10 pt-3 my-4 ">
                         <div className="">
                         <div className="flex">
                             <div className="h-6 w-6 rounded-full animate-pulse bg-slate-500 flex flex-col justify-center"></div>
@@ -45,7 +45,7 @@
                         </div>
                     </div>
 
-            <div className=" rounded-sm border mx-10 pt-3 mb-2 ">
+            <div className=" rounded-sm  mx-10 pt-3 my-4 ">
                         <div className="">
                         <div className="flex">
                             <div className="h-6 w-6 rounded-full animate-pulse bg-slate-500 flex flex-col justify-center"></div>
@@ -58,7 +58,7 @@
                         </div>
                     </div>
 
-            <div className=" rounded-sm border mx-10 pt-3 mb-2 ">
+            <div className=" rounded-sm  mx-10 pt-3 my-4 ">
                         <div className="">
                         <div className="flex">
                             <div className="h-6 w-6 rounded-full animate-pulse bg-slate-500 flex flex-col justify-center"></div>

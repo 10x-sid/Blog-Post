@@ -10,6 +10,10 @@ export default function Publish(){
     const[title,setTitle]=useState("")
     const[desc,setDesc]=useState("")
     async function publish(){
+        if(!(title && desc)){
+            alert("can't publish empty")
+            return
+        }
        try { const res = await axios.post(`${URL}/api/v1/blog`,{
             title,
             content:desc
