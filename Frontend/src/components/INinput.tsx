@@ -52,10 +52,10 @@ export const INinput=()=>{
                 </div>
                 <div>
                        
-                        <Input title="Email" placeholder="Alex@gmail.com" onchange={(e)=>{
+                        <Input title="Email" placeholder="alex@gmail.com" onchange={(e)=>{
                             setInputs((c)=>( // we use c=>() and not c=>{} cause we want to return the new changes value to setInputs!!
                                 {...c,
-                                email:e.target.value}
+                                email:e.target.value.toLowerCase()}
                             ))
 
                     }}/>

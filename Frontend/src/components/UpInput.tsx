@@ -56,7 +56,7 @@ export const Upinput=()=>{
                         <Input title="Email" placeholder="Alex@gmail.com" onchange={(e)=>{
                             setInputs((c)=>( 
                                 {...c,
-                                email:e.target.value}
+                                email:e.target.value.toLowerCase()}
                             ))
 
                     }}/>
