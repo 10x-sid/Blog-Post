@@ -7,8 +7,8 @@ import { Blogskeleton } from "../components/Skeleton"
 
 export default function Blog(){
     const{id}=useParams()
-    //@ts-ignore
-    const {loading,blog}=useblog({id:id}) //we can send dirctlu id but to avoid type error
+    
+    const {loading,blog}=useblog({id:id||""}) //we can send dirctlu id but to avoid type error
     if(!loading){
         return(
             <div>
