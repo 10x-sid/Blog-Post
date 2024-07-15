@@ -48,7 +48,7 @@ export default function Publish(){
                 
             </div>
             <div className="flex flex-col justify-center items-center max-w-screen-lg w-full lg:mx-[200px] mt-4 lg:mt-10 shadow-md border-1 bg-slate-400 rounded-full">
-                 <input className="h-10 text-2xl text-thin rounded-sm px-3  font-bold w-full bg-slate-50  " value={input.title} placeholder="Title" onChange={(e)=>{
+                 <input className="h-10 lg:text-2xl text-lg  text-thin rounded-sm px-3  font-medium lg:font-bold w-full bg-slate-50  " value={input.title} placeholder="Title" onChange={(e)=>{
                     setInput((c)=>(
                         {
                             ...c,
@@ -58,7 +58,7 @@ export default function Publish(){
                     ))
                  }}/>
                 
-                <textarea className="h-screen text-lg bg-slate-50 rounded-lg px-3 mt-2 w-full" value={input.content} onChange={(e)=>{
+                <textarea className="h-screen  text-sm lg:text-lg bg-slate-50 rounded-lg px-3 mt-2 w-full" value={input.content} onChange={(e)=>{
                     setInput((c)=>(
                         {
                             ...c,
