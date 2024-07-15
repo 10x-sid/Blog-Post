@@ -3,24 +3,29 @@ import { CardProps } from './BlogCard';
 
 export const Post = ({ title, content, publishDate, authorName }: CardProps) => {
     return (
-        <div className="grid grid-cols-12 mx-10 px-2 mt-3 w-auto">
-            <div className="col-span-10 pt-5  px-20">
-                <h2 className='font-extrabold text-black text-4xl mb-10'>{title}</h2>
-                <div className='flex'>
-                    <div className="text-gray-700 text-4xl flex flex-col justify-start top-0 pb- mb-2 font-bold  m-2  rounded-full">{(content.slice(0,1).toUpperCase())}</div>
+       <div className='flex flex-col justify-center items-center'>
+             <div className="grid lg:grid-cols-12 lg:mx-10 px-2 mt-3 w-auto">
+            <div className="col-span-10 pt-5  lg:px-20">
+                <h2 className='lg:font-extrabold font-bold text-black text-xl lg:text-4xl mb-10'>{title}</h2>
+                <p className='text-gray-500 mx-2 visible lg:invisible text-lg flex flex-col justify-start top-0 pb- mb-2 font-normal   rounded-full'>{content}</p>
+                <div className='flex '>
+                    <div className="text-gray-700  invisible lg:visible text-4xl flex flex-col justify-start top-0 pb- mb-2 font-bold  m-2  rounded-full">{(content.slice(0,1).toUpperCase())}</div>
                     
-                    <div className='font-semibold text-gray-600 text-lg overflow-hidden pr-20'>{content.slice(1,content.split(" ")[0].length)+" "+content.split(" ").slice(1,20).join(" ")}</div>
+                    <div className='font-semibold invisible lg:visible text-gray-600 text-lg overflow-hidden pr-20'>{content.slice(1,content.split(" ")[0].length)+" "+content.split(" ").slice(1,20).join(" ")}</div>
                 </div>
-                <div className='font-semibold text-gray-600 text-lg overflow-hidden pr-20'>{content.split(" ").slice(20,content.length).join(" ")}</div>
+                <div className='font-semibold text-gray-600 invisible lg:visible  text-lg overflow-hidden pr-20'>{content.split(" ").slice(20,content.length).join(" ")}</div>
             </div>
-            <div className="col-span-2 mt-5">
-                <div className='flex'>
+            <div className="col-span-2 mt-5 invisible lg:visible">
+                <div className='flex '>
                     <div className=' rounded-full w-5 h-5 m-1 bg-slate-300 flex flex-col justify-center'></div>
                     <p className='text-black font-bold text-md'>{authorName.toUpperCase().split(" ")[0]}</p>
                 </div>
                 <p className='font-normal text-lg text-slate-700 underline'>Published ON:{publishDate}</p>
             </div>
         </div>
+
+       </div>
+        
     );
 };
 

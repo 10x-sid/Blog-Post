@@ -13,7 +13,7 @@ export default function Publish(){
         content:""
     })
     async function publish(){
-        if(!(input)){
+        if(!(input.title&&input.content)){
             alert("can't publish empty")
             return
         }
@@ -36,10 +36,10 @@ export default function Publish(){
         
     }
     return(
-        <div>
-            <div className="flex justify-between mt-3 p-2 border-b">
+        <div className=" ">
+            <div className="flex flex-col-2 justify-center lg:justify-between mt-3 p-2 border-b">
                  <Link to="/">
-                <div className="flex flex-col justify-center items-center pt-2 text-black font-extrabold">
+                <div className="flex flex-col justify-center invisible lg:visible items-center pt-2 text-black font-extrabold">
                     BLOG-POST
                 </div>
                 </Link>
@@ -47,7 +47,7 @@ export default function Publish(){
                     <button className="bg-green-700 hover:bg-green-800 flex flex-col justify-center items-center rounded-full h-3 w-6 px-10 py-5" onClick={publish}>Publish</button>
                 
             </div>
-            <div className="flex flex-col justify-center max-w-screen-lg w-full mx-[200px] mt-10 shadow-md border-1 bg-slate-400 rounded-full">
+            <div className="flex flex-col justify-center items-center max-w-screen-lg w-full lg:mx-[200px] mt-4 lg:mt-10 shadow-md border-1 bg-slate-400 rounded-full">
                  <input className="h-10 text-2xl text-thin rounded-sm px-3  font-bold w-full bg-slate-50  " value={input.title} placeholder="Title" onChange={(e)=>{
                     setInput((c)=>(
                         {
@@ -58,7 +58,7 @@ export default function Publish(){
                     ))
                  }}/>
                 
-                <textarea className="h-screen text-lg bg-slate-50 rounded-lg px-3 mt-2" value={input.content} onChange={(e)=>{
+                <textarea className="h-screen text-lg bg-slate-50 rounded-lg px-3 mt-2 w-full" value={input.content} onChange={(e)=>{
                     setInput((c)=>(
                         {
                             ...c,

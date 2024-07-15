@@ -18,7 +18,7 @@ export default function Blog(){
 
     }
     return(
-        <div>
+        <div >
             <Navbar/>
             
             <Post title={blog.title} publishDate={blog.date} content={blog.content} authorName={blog.author.name}/>
