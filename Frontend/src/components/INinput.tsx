@@ -24,6 +24,10 @@ export const INinput=()=>{
        try{ 
         
         const res = await axios.post(`${URL}/api/v1/signin`,inputs)
+        if(res.data=="invalid inputs!!"){
+            throw new Error
+            return
+        }
         const jwt= res.data.jwt
         console.log(jwt);
         
