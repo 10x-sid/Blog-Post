@@ -51,18 +51,28 @@ export function useblog({id}:{id:string}){
     })
     useEffect(()=>{
         async function Res(){
+
             try{
+                
                 const res = await axios.get(`${URL}/api/v1/blog/${id}`,{
                     headers:{
                         Authorization:localStorage.getItem("token")
                     }
                 })
-    
-                setBlog(res.data)
-                setLoading(true)
+                if(res.data!=null){
+                    setBlog(res.data)
+                    setLoading(true)
+                    
+                }else{
+                    throw new Error
+                }
+                
+                
             }catch (e) {
-                console.error("Error fetching blog:", e);
-                navigate("/");}
+                
+                // alert("Blog is removed")
+                navigate("/");
+                }
             // } finally {
             //     setLoading(false);
             // }
