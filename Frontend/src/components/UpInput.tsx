@@ -31,6 +31,7 @@ export const Upinput=()=>{
             
             navigate("/signin")
         }catch(e){
+            alert("Invalid inputs")
             
         }
 
