@@ -110,11 +110,11 @@ export function useName(){
     }
 }
 
-export function useUser(){
-    const [userblog,setUserBlog]=useState()
-    useEffect(()=>{
-        axios.get(`${URL}/api/v1/blog`)
-    })
+// export function useUser(){
+//     const [userblog,setUserBlog]=useState()
+//     useEffect(()=>{
+//         axios.get(`${URL}/api/v1/blog`)
+//     })
 
-}
+// }
 
