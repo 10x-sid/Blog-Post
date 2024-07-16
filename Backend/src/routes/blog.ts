@@ -3,6 +3,7 @@ import { verify,decode } from "hono/jwt";
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { blogSchema, UpdateblogSchema } from "@shekharsid/blog-post";
+import { useEffect } from "hono/jsx";
 
 interface Env {
     Bindings: {
@@ -14,6 +15,32 @@ interface Env {
     // }; won't work why??
   }
 const blog = new Hono<Env>()
+
+
+blog.get('/bulk',async(c)=>{    //all the title for the landing page  and it has to be above :/id cause every time only that will executed!!
+   
+    const prisma = new PrismaClient({datasourceUrl:c.env.DATABASE_URL}).$extends(withAccelerate())
+    try{
+        const allBlog= await prisma.post.findMany({
+            select:{
+                id:true,
+                content:true,
+                title:true,
+                author:{
+                    select:{
+                        name:true
+                    }
+                },
+                date:true
+            }
+        })
+        c.status(200)
+        return c.json(allBlog)
+    }catch(e){
+        return c.text("eroor file fetching data")
+    }
+})
+
 
 //middleware
 blog.use("/*",async(c,next)=>{  //* is for every blog route 
@@ -93,29 +120,6 @@ blog.get('/myblog',async(c)=>{ //all the blog of the user
    
 })
 
-blog.get('/bulk',async(c)=>{    //all the title for the landing page  and it has to be above :/id cause every time only that will executed!!
-   
-    const prisma = new PrismaClient({datasourceUrl:c.env.DATABASE_URL}).$extends(withAccelerate())
-    try{
-        const allBlog= await prisma.post.findMany({
-            select:{
-                id:true,
-                content:true,
-                title:true,
-                author:{
-                    select:{
-                        name:true
-                    }
-                },
-                date:true
-            }
-        })
-        c.status(200)
-        return c.json(allBlog)
-    }catch(e){
-        return c.text("eroor file fetching data")
-    }
-})
 
 
 blog.get('/:id',async(c)=>{ //blog post for the slected blog
@@ -220,5 +224,7 @@ blog.put('/',async(c)=>{
 
 
 })
+
+
 
 export default blog

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import {  useCallback, useEffect, useState } from "react";
 import { URL } from "../Config";
 import { useNavigate } from "react-router-dom";
 import { blogProp } from "../pages/BlogDash";
@@ -12,16 +12,16 @@ export function useDash(){
     useEffect(()=>{
         async function Res() {
           try{ 
-            const res= await  axios.get(`${URL}/api/v1/blog/bulk`,{
-            headers:{
-                Authorization:localStorage.getItem("token")
-            }
-           })
+            const res= await  axios.get(`${URL}/api/v1/blog/bulk`)
+            
+            
            
            
            setBlogs(res.data)
            setLoading(false)
         }catch(e){
+            
+            
             navigate("/signin")
         }
             
@@ -71,7 +71,7 @@ export function useblog({id}:{id:string}){
             }catch (e) {
                 
                 // alert("Blog is removed")
-                navigate("/");
+                navigate("/signin");
                 }
             // } finally {
             //     setLoading(false);
@@ -86,35 +86,60 @@ export function useblog({id}:{id:string}){
 }
 
 
-export function useName(){
-    const[name,setName]=useState("")
-    const [email,setEmail]=useState("")
 
-    useEffect(()=>{
-        axios.get(`${URL}/api/v1/blog/name`,{
-            headers:{
-                Authorization:localStorage.getItem("token")
-            }
-        }).then((res)=>{
-            console.log(res);
-            
-            setName(res.data.res.name)
-            setEmail(res.data.res.email)
-        })
-    },[])
-    console.log(name);
-    
+ // replace with your actual base URL
 
-    return {
-        name,email
-    }
+export function useName() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+//   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchNameAndEmail = async () => {
+      try {
+        const response = await axios.get(`${URL}/api/v1/blog/name`, {
+          headers: {
+            Authorization: localStorage.getItem("token")
+          }
+        });
+        // console.log("hii");
+        // console.log(response.data.msg);
+        setName(response.data.res.name);
+          setEmail(response.data.res.email);
+      } catch (error) {
+        setName("Aynonimus")
+        // console.log(error);
+        // navigate("/signin");
+      }
+    };
+
+    fetchNameAndEmail();
+  }, []);
+
+  return { name, email };
 }
 
-// export function useUser(){
-//     const [userblog,setUserBlog]=useState()
-//     useEffect(()=>{
-//         axios.get(`${URL}/api/v1/blog`)
-//     })
 
-// }
+// replace with your actual base URL
+
+export function useLoggedIn() {
+  const navigate = useNavigate();
+
+  const checkLoggedin = useCallback(async() => {
+    
+        try{
+            await axios.get(`${URL}/api/v1/blog/890372908dfd`, {
+                headers: {
+                  Authorization: localStorage.getItem("token"),
+                },
+              });
+        }catch(e){
+            navigate("/signin")
+        }
+    
+    
+  },[navigate])
+  return checkLoggedin
+  
+}
 

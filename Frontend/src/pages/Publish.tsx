@@ -3,11 +3,19 @@ import {  useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { URL } from "../Config"
 import { blogTypes } from "@shekharsid/blog-post"
+import { useLoggedIn } from "../hooks/get"
+// import { useName } from "../hooks/get"
 
 
-Link
+
 export default function Publish(){
+    // const checkLoggedIn=useLoggedIn()
+    const chekLoggedin=useLoggedIn()
+    chekLoggedin()
+    
     const navigate=useNavigate()
+    // const {name}=useName()
+    
     const [input,setInput]=useState<blogTypes>({
         title:"",
         content:""

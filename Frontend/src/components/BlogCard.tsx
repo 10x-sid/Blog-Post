@@ -1,4 +1,4 @@
-
+import { useLoggedIn } from "../hooks/get";
 
 export interface CardProps {
     authorName: string;
@@ -26,10 +26,17 @@ export function BlogCard({ authorName, publishDate, title, content }: CardProps)
 }
 
 export function Avatar({title,size="small"}:{title:string,size?:"small"|"big"}){
+    const checkLoggedIn=useLoggedIn()
+    
+    //@ts-ignore
+    const handleProfileClick = async (event) => {
+        event.preventDefault();
+        await checkLoggedIn()
+      };
 
     return(
         
-            <div className={`relative inline-flex items-center justify-center ${size==="small"? " w-5 h-5 " : " w-10 h-10 "}overflow-hidden bg-gray-500    rounded-full `}>
+            <div  onClick={handleProfileClick}  className={`relative inline-flex items-center justify-center ${size==="small"? " w-5 h-5 " : " w-10 h-10 "}overflow-hidden bg-gray-500    rounded-full `}>
                 <span className={`text-black ${size==="small"? "font-medium":"text-xl"}`}>{title.toUpperCase()[0]}</span>
             </div>
 

@@ -1,8 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useName } from "../hooks/get";
+import { useName ,useLoggedIn } from "../hooks/get";
 
 export default function Profile(){
     const navigate = useNavigate()
+    
+    const checkLoggedin= useLoggedIn()
+    checkLoggedin()
     return(
         <div>
             <div className="top-0 border-b flex p-4 justify-between">
@@ -32,7 +35,9 @@ export default function Profile(){
 
 
 function Avatar(){
+    
     const {name,email}=useName()
+    
     return(
         <div className="flex justify-start">
             <div className="rounded-full w-12 h-12 flex justify-center pt-2  m-4 text-2xl font-bold bg-slate-700 text-black ">{name.slice(0,1).toUpperCase()}</div>
