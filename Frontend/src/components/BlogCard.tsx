@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useLoggedIn } from "../hooks/get";
 
 export interface CardProps {
@@ -27,11 +28,13 @@ export function BlogCard({ authorName, publishDate, title, content }: CardProps)
 
 export function Avatar({title,size="small"}:{title:string,size?:"small"|"big"}){
     const checkLoggedIn=useLoggedIn()
+    const navigate=useNavigate()
     
     //@ts-ignore
     const handleProfileClick = async (event) => {
         event.preventDefault();
         await checkLoggedIn()
+        navigate("/profile")
       };
 
     return(

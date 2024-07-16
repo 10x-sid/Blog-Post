@@ -1,15 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Avatar } from "./BlogCard";
 import { useLoggedIn,  useName } from "../hooks/get";
 
 export const Navbar = () => {
   const { name } = useName();
   const checkLoggedin=useLoggedIn()
+  const navigate=useNavigate()
   ;
     //@ts-ignore
   const handleNewClick = async (event) => {
     event.preventDefault();
     await checkLoggedin()
+    navigate("/publish")
     
   }
   //@ts-ignore
