@@ -6,10 +6,10 @@ export const Post = ({ title, content, publishDate, authorName }: CardProps) => 
     
     return (
        <div className='flex flex-col justify-center items-center'>
-             <div className="grid grid-cols-12 mx-10 px-2 mt-3 w-auto">
-                    <div className="col-span-10 pt-5  lg:px-20">
+             <div className="grid grid-cols-12 lg:mx-10 lg:px-2 mt-3 w-auto">
+                    <div className="lg:col-span-10 col-span-12 pt-5 px-4 lg:px-20">
                         <h2 className={`lg:font-extrabold font-bold  text-black text-xl lg:text-4xl`}>{title}</h2>
-                        <p className='text-gray-500 lg:hidden  text-lg flex flex-col justify-start top-0 pb- mb-2 font-normal   rounded-full mt-2'>{content}</p>
+                        <p className='text-gray-500 lg:hidden  text-lg flex flex-col justify-between top-0  mb-2 font-normal   rounded-full mt-2'>{content}</p>
                         <Lgcontent content={content}/>
                         
                     </div>

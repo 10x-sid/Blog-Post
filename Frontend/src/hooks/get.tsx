@@ -88,6 +88,7 @@ export function useblog({id}:{id:string}){
 
 export function useName(){
     const[name,setName]=useState("")
+    const [email,setEmail]=useState("")
 
     useEffect(()=>{
         axios.get(`${URL}/api/v1/blog/name`,{
@@ -98,12 +99,22 @@ export function useName(){
             console.log(res);
             
             setName(res.data.res.name)
+            setEmail(res.data.res.email)
         })
     },[])
     console.log(name);
     
 
-    return name
+    return {
+        name,email
+    }
+}
+
+export function useUser(){
+    const [userblog,setUserBlog]=useState()
+    useEffect(()=>{
+        axios.get(`${URL}/api/v1/blog`)
+    })
 
 }
 

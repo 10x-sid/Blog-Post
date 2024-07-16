@@ -46,7 +46,8 @@ blog.get("/name",async(c)=>{
 
             },
             select:{
-                name:true
+                name:true,
+                email:true
 
 
             }
@@ -76,12 +77,7 @@ blog.get('/myblog',async(c)=>{ //all the blog of the user
                 title:true,
                 content:true,
                 date:true,
-                author:{
-                    select:{
-                        name:true
-                    }
-                }
-
+               
 
             }
             
