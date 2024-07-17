@@ -21,6 +21,9 @@ blog.get('/bulk',async(c)=>{    //all the title for the landing page  and it has
    
     const prisma = new PrismaClient({datasourceUrl:c.env.DATABASE_URL}).$extends(withAccelerate())
     try{
+        const page =  c.req.query("page") ||"1"
+        const start = (parseInt(page)-1)*5
+        const end = parseInt(page)*5
         const allBlog= await prisma.post.findMany({
             select:{
                 id:true,
@@ -34,8 +37,10 @@ blog.get('/bulk',async(c)=>{    //all the title for the landing page  and it has
                 date:true
             }
         })
+        const result = allBlog.slice(start,end)
+
         c.status(200)
-        return c.json(allBlog)
+        return c.json(result)
     }catch(e){
         return c.text("eroor file fetching data")
     }
