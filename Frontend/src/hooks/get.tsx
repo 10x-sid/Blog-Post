@@ -1,38 +1,45 @@
 import axios from "axios";
-import {  useCallback, useEffect, useState } from "react";
+import {  useCallback, useEffect, useRef, useState } from "react";
 import { URL } from "../Config";
 import { useNavigate } from "react-router-dom";
 import { blogProp } from "../pages/BlogDash";
 
-export function useDash(){
+export function useDash({page}:{page:number}){
     const [loading,setLoading]=useState(true)
-    const[blogs,setBlogs]=useState([])
+    const[blogs,setBlogs]=useState<blogProp[]>([])
+    const prevPage= useRef(0)
+  
+    
     const navigate=useNavigate()
 
     useEffect(()=>{
         async function Res() {
+          if(prevPage.current==page) return;
           try{ 
-            const res= await  axios.get(`${URL}/api/v1/blog/bulk`)
+            const res= await  axios.get(`${URL}/api/v1/blog/bulk?page=${page}`)
             
-            
+            if(typeof(res.data)=="string"){
+              return
+            }
            
-           
-           setBlogs(res.data)
+           prevPage.current=page
+           setBlogs(Prev=>[...Prev ,...res.data])
            setLoading(false)
         }catch(e){
             
-            
+            setLoading(true)
             navigate("/signin")
         }
             
         }
         Res()
-    },[])
+    },[page])
 
     return{
-        loading,
-        blogs
-    }
+      loading,
+      blogs
+  }
+  
 }
 
 export function useblog({id}:{id:string}){

@@ -3,6 +3,8 @@ import { BlogCard } from "../components/BlogCard";
 import { Navbar } from "../components/Navbar";
 import { useDash } from "../hooks/get";
 import { Skeleton } from "../components/Skeleton";
+import { useEffect, useState } from "react";
+
 
 export interface blogProp{
     id:string,
@@ -17,7 +19,21 @@ export interface blogProp{
 }
 
 export default function Dashboard(){
-    const {loading,blogs}=useDash()
+    const [page,setPage]=useState(1)
+    
+    const {loading,blogs}=useDash({page})
+   
+    
+    useEffect(()=>{
+        window.addEventListener("scroll",handelscroll)
+        return ()=>{window.removeEventListener("scroll",handelscroll)}
+
+    },[page])
+    function handelscroll(){
+        if(window.innerHeight+ document.documentElement.scrollTop>=(document.documentElement.offsetHeight -5)){
+            setPage(prevPage=>prevPage+1)
+        }
+    }
     return(
         <div>
            <div className=" "> <Navbar/></div>

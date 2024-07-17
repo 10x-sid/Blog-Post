@@ -37,10 +37,19 @@ blog.get('/bulk',async(c)=>{    //all the title for the landing page  and it has
                 date:true
             }
         })
-        const result = allBlog.slice(start,end)
+        if(start>=0 && (end-5)<=allBlog.length){
+            const result = allBlog.slice(start,end)
+            c.status(200)
+            return c.json(result)
+            
 
-        c.status(200)
-        return c.json(result)
+
+        }else{
+            throw new Error
+        }
+        
+       
+        
     }catch(e){
         return c.text("eroor file fetching data")
     }
