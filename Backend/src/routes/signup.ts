@@ -2,8 +2,7 @@ import { Hono } from "hono"
 import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { signupSchema } from "@shekharsid/blog-post"
-
-
+import bcrypt from "bcryptjs";
 
 
 const signup= new Hono<{
@@ -23,10 +22,16 @@ signup.post('/',async(c)=>{
         if(!success){
             return c.text("invalid inputs")
         }
+        // console.log(body.password);
+        
+        const hashPass= await bcrypt.hash(body.password,10)
+        // console.log(hashPass);
+        
+
         await prisma.user.create({
             data:{
               email:body.email,
-              password:body.password,
+              password:hashPass,
               name:body.name
             }
       

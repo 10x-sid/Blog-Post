@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client/edge"
 import { withAccelerate } from "@prisma/extension-accelerate"
 import { sign } from "hono/jwt"  //don't need to import the jsonwebtoken lib to perform this task!! it it inbluid
 import { signinSchema } from "@shekharsid/blog-post"
-
+import bcrypt, { hash } from "bcryptjs";
 
 const signin= new Hono<{
     Bindings:{
@@ -22,22 +22,28 @@ signin.post('/',async(c)=>{
        
         const user = await prisma.user.findUnique({
             where:{
-                email:body.email,
-                password:body.password
+                email:body.email
             }
         })
-        if(user){
+        console.log(user);
+        const isMatch = await bcrypt.compare(body.password,(user?.password || ""))
+        console.log(isMatch);
+        
+
+        if(user && isMatch){
             const token = await sign({id:user.id},c.env.JWT_sec)
             return c.json({
                 jwt:token
             })
+        }else{
+            throw new Error
         }
         
 
        
     }catch(e){
         return c.json({
-            msg:"invalid email"
+            msg:"invalid creds"
         })
     }
 
