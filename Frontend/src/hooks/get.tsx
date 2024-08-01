@@ -43,6 +43,7 @@ export function useDash({page}:{page:number}){
 }
 
 export function useblog({id}:{id:string}){
+    
     const navigate= useNavigate()
     const [loading,setLoading]=useState(false)
     const [blog,setBlog]=useState<blogProp>({
@@ -56,6 +57,8 @@ export function useblog({id}:{id:string}){
         date:""
         
     })
+  
+    
     useEffect(()=>{
         async function Res(){
 
@@ -148,5 +151,26 @@ export function useLoggedIn() {
   },[navigate])
   return checkLoggedin
   
+}
+
+interface userBlog{
+  title:string,
+  id:string
+}
+
+export function useUserBlog(){
+  const[content,setContent]=useState<userBlog[]>([])
+
+  useEffect(()=>{
+    axios.get(`${URL}/api/v1/blog/user/blog`,{
+      headers:{
+        Authorization:localStorage.getItem("token")
+      }
+    }).then((res)=>{
+      setContent(res.data)
+    })
+  },[])
+
+  return content
 }
 

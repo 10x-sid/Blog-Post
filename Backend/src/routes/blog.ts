@@ -240,5 +240,35 @@ blog.put('/',async(c)=>{
 })
 
 
+blog.get("/user/blog",async(c)=>{
+    const prisma = new PrismaClient({datasourceUrl:c.env.DATABASE_URL}).$extends(withAccelerate())
+    const userId=c.get("jwtPayload")
+    
+    
+    try{
+        const data = await prisma.post.findMany({
+        where:{
+            authorId:userId
+        },
+        select:{
+            id:true,
+            title:true,
+            
+        }
+       
+        })
+        if(!data){
+            throw new Error
+        }
+        return c.json(data)
+        
+        
+    
+    }catch(e){
+        return c.text("error while fetching")
+    }
+
+})
+
 
 export default blog

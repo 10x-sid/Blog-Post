@@ -11,7 +11,7 @@ export const Navbar = () => {
   const handleNewClick = async (event) => {
     event.preventDefault();
     await checkLoggedin()
-    navigate("/publish")
+    navigate("/publish/new")
     
   }
   //@ts-ignore

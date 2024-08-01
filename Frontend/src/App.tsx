@@ -5,6 +5,7 @@ import Profile from "./pages/Profile";
 import Blog from "./pages/Blog";
 import Dashboard from "./pages/BlogDash";
 import Publish from "./pages/Publish";
+// import Edit from "./pages/Edit";
 
 export default function App(){
     return(
@@ -16,7 +17,8 @@ export default function App(){
           <Route path="/blog/:id" element={<Blog/>}></Route>
           <Route path="/profile" element={<Profile/>}></Route>
           <Route path="/" element={<Dashboard/>}></Route>
-          <Route path="/publish" element={<Publish/>}></Route>
+          <Route path="/publish/:id" element={<Publish/>}></Route>
+          {/* <Route path="/publish/:id" element={<Edit/>}></Route> */}
         </Routes>
       </BrowserRouter>
     

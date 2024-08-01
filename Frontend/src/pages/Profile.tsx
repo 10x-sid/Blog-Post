@@ -1,5 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useName ,useLoggedIn } from "../hooks/get";
+import { useName ,useLoggedIn, useUserBlog } from "../hooks/get";
+import { FaEdit } from "react-icons/fa";
+
 
 export default function Profile(){
     const navigate = useNavigate()
@@ -28,7 +30,10 @@ export default function Profile(){
                         <Avatar/>
                     </div>
             </div>
-        
+            <div className="mt-12 grid md:grid-cols-3 px-8">
+                <ProfileCard/>
+
+            </div>
         </div>
     )
 }
@@ -48,4 +53,39 @@ function Avatar(){
             
         </div>
     )
+}
+
+
+function ProfileCard(){
+    const data =useUserBlog()
+    const navigate=useNavigate()
+    return(
+
+        <>
+        {data.map(blog=>{
+            return(
+                
+                
+
+                <div className="shadow-md border-2 border-green-700 mt-4 mx-4 bg-gray-100 h-40 w-100 rounded-xl ">
+                                    
+                                    <div className="flex justify-between">
+                                    <Link to={`/blog/${blog.id}`}>
+                                        <h1 className="font-bold pl-3 pr-4  text-2xl underline ">{blog.title}</h1>
+                                    </Link>
+                                    
+                                    <FaEdit  className=" text-4xl max-w-7 min-w-7  text-green-700" onClick={()=>{
+                                        navigate(`/publish/${blog.id}`)
+                                    }}/>
+
+                                    </div>
+                                    
+                            
+                </div>  
+               
+            )
+        })}
+        </>
+    )
+
 }
